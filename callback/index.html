@@ -12,10 +12,18 @@
 </body>
 <script>
     let url = new URL(window.location.href);
-    console.log(url);
-    let token = url.searchParams.get('access_token');
-    let idToken = url.searchParams.get('id_token');
-    h2 = document.querySelector('h2');
-    h2.innerHTML = token + "/n" + idToken;
+    let hash = url.hash.substring(1);
+    let result = hash.split('&').reduce(function(result, item) {
+        let parts = item.split('=');
+        result[parts[0]] = parts[1];
+        return result;
+    }, {});
+
+    localStorage.setItem('access_token', result.access_token);
+    localStorage.setItem('id_token', result.id_token);
+    localStorage.setItem('expires_at', result.expires_at);
+    localStorage.setItem('profile', JSON.stringify(result.profile));
+    window.location.href = './index.html';
+    
 </script>
 </html>

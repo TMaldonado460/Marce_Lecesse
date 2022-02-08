@@ -14,4 +14,12 @@
     <iframe src="https://dev-t-62nrhl.us.auth0.com/authorize?client_id=LIUElt2sFMsexLoOV0GSB4US1a9d4vv5&response_type=token%20id_token&redirect_uri=https://tmaldonado460.github.io/Marce_Lecesse/callback&scope=openid%20profile&nonce=mynonce" frameborder="0"></iframe>
     <a href="https://dev-t-62nrhl.us.auth0.com/authorize?client_id=LIUElt2sFMsexLoOV0GSB4US1a9d4vv5&response_type=token%20id_token&redirect_uri=https://tmaldonado460.github.io/Marce_Lecesse/callback&scope=openid%20profile&nonce=mynonce"><button>Log In</button></a>
 </body>
+
+<script>
+    fetch(get_data_cursos)
+    .then(data => data.json())
+    .then(data => {
+        console.log(data);
+    })
+</script>
 </html>

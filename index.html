@@ -9,7 +9,12 @@
     <title>Marce Leccese</title>
 </head>
 <body>
+
     <h1>hello world</h1>
+    <p>
+        Logueado como <span></span>>
+    </p>
+    <button></button>
     <!-- <iframe src="https://dev-t-62nrhl.us.auth0.com/authorize?client_id=LIUElt2sFMsexLoOV0GSB4US1a9d4vv5&response_type=token%20id_token&redirect_uri=https://tmaldonado460.github.io/Marce_Lecesse/callback&scope=openid%20profile&nonce=mynonce" frameborder="0"></iframe> -->
     <a href="https://dev-t-62nrhl.us.auth0.com/authorize?client_id=LIUElt2sFMsexLoOV0GSB4US1a9d4vv5&response_type=token%20id_token&redirect_uri=https://tmaldonado460.github.io/Marce_Lecesse/callback&scope=openid%20profile&nonce=mynonce"><button>Log In</button></a>
 </body>
@@ -22,11 +27,22 @@
             <h2>${data.page_proyect1_Curso[0].nombre}</h2>
             <img src="${data.page_proyect1_Curso[0].image_url}">
             <span>${data.page_proyect1_Curso[0].descripcion}</span>
-            <button>Inscribirse</button>
+            <button data-id="${page_proyect1_Curso[0].id}">Inscribirse</button>
         </article>`
         document.querySelector("body").innerHTML += article;
     })
 
-    
+
+    fetch("https://harmless-titmouse-39.hasura.app/api/rest/user", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem("data")).id_token
+        }
+    }).then(data => data.json())
+    .then(data => {
+        document.querySelector("span").innerHTML = data.name;
+    })
+
 </script>
 </html>

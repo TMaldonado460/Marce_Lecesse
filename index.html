@@ -27,7 +27,7 @@
             <h2>${data.page_proyect1_Curso[0].nombre}</h2>
             <img src="${data.page_proyect1_Curso[0].image_url}">
             <span>${data.page_proyect1_Curso[0].descripcion}</span>
-            <button data-id="${page_proyect1_Curso[0].id}">Inscribirse</button>
+            <button data-id="${data.page_proyect1_Curso[0].id}">Inscribirse</button>
         </article>`
         document.querySelector("body").innerHTML += article;
     })
@@ -41,6 +41,7 @@
         }
     }).then(data => data.json())
     .then(data => {
+        console.log(data);
         document.querySelector("span").innerHTML = data.name;
     })
 

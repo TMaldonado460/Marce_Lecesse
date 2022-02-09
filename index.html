@@ -6,17 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="./scripts/main.js"></script>
+    <link rel="stylesheet" href="./styles/main.css">
+
     <title>Marce Leccese</title>
+    
 </head>
 <body>
 
-    <h1>hello world</h1>
+    <h1>Marce Leccese</h1>
     <p>
-        Logueado como <span></span>>
+        Logueado como <span> Invitado </span>
     </p>
-    <button></button>
     <!-- <iframe src="https://dev-t-62nrhl.us.auth0.com/authorize?client_id=LIUElt2sFMsexLoOV0GSB4US1a9d4vv5&response_type=token%20id_token&redirect_uri=https://tmaldonado460.github.io/Marce_Lecesse/callback&scope=openid%20profile&nonce=mynonce" frameborder="0"></iframe> -->
     <a href="https://dev-t-62nrhl.us.auth0.com/authorize?client_id=LIUElt2sFMsexLoOV0GSB4US1a9d4vv5&response_type=token%20id_token&redirect_uri=https://tmaldonado460.github.io/Marce_Lecesse/callback&scope=openid%20profile&nonce=mynonce"><button>Log In</button></a>
+    <button class="log-out">Log out</button>
+
 </body>
 
 <script>
@@ -27,23 +31,36 @@
             <h2>${data.page_proyect1_Curso[0].nombre}</h2>
             <img src="${data.page_proyect1_Curso[0].image_url}">
             <span>${data.page_proyect1_Curso[0].descripcion}</span>
-            <button data-id="${data.page_proyect1_Curso[0].id}">Inscribirse</button>
+            <button data-id="${data.page_proyect1_Curso[0].id}" class="inscripcion">Inscribirse</button>
         </article>`
         document.querySelector("body").innerHTML += article;
     })
-
-
-    fetch("https://harmless-titmouse-39.hasura.app/api/rest/user", {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem("data")).id_token
-        }
-    }).then(data => data.json())
-    .then(data => {
-        console.log(data);
-        document.querySelector("span").innerHTML = data.name;
+    .then(() => {
+        document.querySelectorAll(".inscripcion").forEach(elm => {
+        console.log(elm);
+        elm.addEventListener("click", (e) => {
+            window.location.href = `./clase/index.html?id=${e.target.dataset.id}`;
+        })
     })
+    })
+
+    if (localStorage.getItem('data')) {    
+        fetch("https://harmless-titmouse-39.hasura.app/api/rest/user", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem("data")).id_token
+            }
+        }).then(data => data.json())
+        .then(data => {
+            document.querySelector("span").innerHTML = data.page_proyect1_Usuario[0].name;
+        })
+    }
+    else {
+        document.querySelector(".log-out").style.display = "none";
+    }
+
+    
 
 </script>
 </html>

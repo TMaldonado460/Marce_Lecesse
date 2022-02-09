@@ -5,8 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    hello
+    <a href="../index.html">volver al menu principal</a>
+    <h1></h1>
+    <section></section>
 </body>
+
+<script>
+    var queryString = window.location.search; // Returns:'?q=123'
+
+    let params = new URLSearchParams(queryString);
+    let q = params.get("id"); // is the number 123
+
+
+
+    fetch(`https://harmless-titmouse-39.hasura.app/api/rest/cursos/${q}`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem("data")).id_token
+        }
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            console.log(JSON.stringify(myJson));
+            document.querySelector("h1").innerHTML = myJson.page_proyect1_Usuario[0].UsuarioXCursos[0].Curso.nombre;
+            let parent = document.querySelector("section");
+            myJson.page_proyect1_Usuario[0].UsuarioXCursos[0].Curso.Clases.forEach(element => {
+                article = document.createElement("article");
+                parent.appendChild(article);
+                article.outerHTML = createArticle(element.titulo, element.datos, element.tipo);
+            });
+        });
+
+        function createArticle(title, data, type) {
+            switch (type) {
+                case 1:
+                    return `<article class="video"><h3>${title}</h3><iframe src="${data}/preview" frameborder="0"allowfullscreen></iframe></article>`
+                case 3:
+                    return `<article class="mensaje"><h3>${title}</h3><p>${data}</p></article>`
+                case 2:
+                    return `<article class="pdf"><h3>${title}</h3><embed src="https://drive.google.com/file/d/${data}/preview" width="100%" height="100%"</article>`      
+                case 4:
+                    return `<article class="tarea"><h3>${title}</h3><p>${data}</p><button></button></article>`
+            }
+        }
+</script>
 </html>

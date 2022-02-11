@@ -30,7 +30,7 @@
             console.log(alumno);
             article.outerHTML = `<article>
             <h3>${alumno.email}</h3>
-            <p>${alumno.UsuarioXCursos ? alumno.UsuarioXCursos.reduce((acc, a) => a.Curso.nombre + " /-/ ", "") : "Sin cursos a su nombre"}</p>
+            <p>${alumno.UsuarioXCursos[0] ? alumno.UsuarioXCursos.reduce((acc, a) => a.Curso.nombre + " /-/ ", "") : "Sin cursos a su nombre"}</p>
             <br>
             </article>`;
         }

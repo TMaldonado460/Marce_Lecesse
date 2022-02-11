@@ -29,12 +29,11 @@
             section.appendChild(article);
             article.outerHTML = `<article>
             <h3>${alumno.email}</h3>
-            <p>${alumno.UsuarioXCursos.reduce(a => a.nombre, " / - / ")}</p>
+            <p>${alumno.UsuarioXCursos ? alumno.UsuarioXCursos.reduce(a => a.Curso.nombre + " /-/ ", "") : "Sin cursos a su nombre"}</p>
             <br>
             </article>`;
         }
     })
 </script>
 
-reduce()
 </html>

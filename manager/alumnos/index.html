@@ -27,7 +27,10 @@
             let section = document.querySelector('section');
             let article = document.createElement('article');
             section.appendChild(article);
-            article.outerHTML = `<article><h3>${alumno.UsuarioXCursos[0].Curso.nombre}</h3><p>${alumno.nombre}</p></article>`;
+            article.outerHTML = `<article>
+            <h3>${alumno.email}</h3>
+            <p>${alumno.UsuarioXCursos}</p>
+            </article>`;
         }
     })
 </script>

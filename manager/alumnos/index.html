@@ -30,6 +30,8 @@
             console.log(alumno);
             article.outerHTML = `<article>
             <h3>${alumno.email}</h3>
+            <button data-id="${alumno.id}">Añadir a nuevo curso</button>
+            <button data-id="${alumno.id}">Eliminar alumno</button>
             <p>${alumno.UsuarioXCursos[0] ? alumno.UsuarioXCursos.reduce((acc, a) => a.Curso.nombre + " /-/ ", "") : "Sin cursos a su nombre"}</p>
             <br>
             </article>`;
